@@ -29,3 +29,7 @@ Provide users with movie recommendations (complete with YouTube trailer, contrib
 [recommendMovie.html](img/RecommendMovie.html.png)
 
 [newUser.html](img/NewUser.html.png)
+
+### Team Agreement
+
+[Team Agreement](img/index.html.png)
