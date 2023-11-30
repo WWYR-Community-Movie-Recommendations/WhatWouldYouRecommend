@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Container, Navbar, Nav, Modal, Button, Form, Carousel } from 'react-bootstrap';
+import { Container, Navbar, Nav, Modal, Button, Form, Carousel, Card, } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import styles from './HomePage.module.css';
 
@@ -12,45 +12,51 @@ function HomePage() {
   return (
     <Container fluid className={styles.homePageGridContainer}>
       <Navbar expand="lg" variant="dark" className={styles.homePageNavContainer}>
-        <Nav className="flex-column">
-          <Nav.Link className={styles.navLink} as={Link} to="/home">Home</Nav.Link>
-          <Nav.Link className={styles.navLink} onClick={handleShowModal}>Share a Movie</Nav.Link>
-          <Nav.Link className={styles.navLink} as={Link} to="/communityList">Community List</Nav.Link>
-          <Nav.Link className={styles.navLink} as={Link} to="/aboutUs">About Us</Nav.Link>
-          <Nav.Link className={styles.navLink} as={Link} to="/logout">Log Out</Nav.Link>
+      <Nav className={`flex-column ${styles.homePageNavColumn}`}>
+          <Button variant="primary" as={Link} to="/home" className={styles.homePageNavButton}>Home</Button>
+          <Button variant="primary" onClick={handleShowModal} className={styles.homePageNavButton}>Share a Movie</Button>
+          <Button variant="primary" as={Link} to="/community-list" className={styles.homePageNavButton}>Community List</Button>
+          <Button variant="primary" as={Link} to="/about-us" className={styles.homePageNavButton}>About Us</Button>
+          <Button variant="primary" as={Link} to="/logout" className={styles.homePageNavButton}>Log Out</Button>
         </Nav>
       </Navbar>
 
       <div className={styles.recommendationContainer}>
-        <h1>Random Movie Recommendations</h1>
-        <h2>Welcome User!</h2>
+        <h1 className={styles.homePageH1}>Random Movie Recommendations</h1>
+        <h2 className={styles.homePageH2}>Welcome User!</h2>
   
-        <Carousel>
-          <Carousel.Item>
-            <iframe
-              className={styles.homePageVideoContainer}
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/EyG3xl9jF40"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen>
-            </iframe>
-            <Carousel.Caption>
-              <h3>Test Movie Name</h3>
-              <p>Test Comment</p>
-              <p>Contributor: Test User Name</p>
-            </Carousel.Caption>
+        <Carousel className={styles.homePageCarousel} variant='dark'>
+          <Carousel.Item className={styles.homePageCarouselItem}>
+            <Card 
+              style={{ width: '45vw' }} 
+              className={styles.homePageVideoCard}
+            >
+              <Card.Body>
+                <iframe
+                  className={styles.homePageVideoContainer}
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/EyG3xl9jF40"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen>
+                </iframe>
+                <Card.Title>Movie Name</Card.Title>
+                <Card.Text>
+                  Movie Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere repellendus voluptatem perspiciatis excepturi quidem, explicabo aliquid modi incidunt tempora, unde natus consequuntur rerum. Excepturi veritatis repellendus reprehenderit. Ipsam, aperiam velit?
+                </Card.Text>
+                <Card.Text>Recommended By: User Name</Card.Text>
+              </Card.Body>
+            </Card>
           </Carousel.Item>
-          
         </Carousel>
 
-        <p className={styles.homePageMovieProperties}>
+        {/* <p className={styles.homePageMovieProperties}>
           Click Button Below for Another Movie Recommendation!
         </p>
 
-        <Button type="button" className={styles.getMovieButton}>Get Movie!</Button>
+        <Button type="button" className={styles.getMovieButton}>Get Movie!</Button> */}
       </div>
 
       <Modal show={showModal} onHide={handleCloseModal}>
