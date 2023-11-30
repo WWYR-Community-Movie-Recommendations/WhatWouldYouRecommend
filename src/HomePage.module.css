@@ -60,13 +60,6 @@
   font-size: 1.55vw;
 }
 
-/* .recommendation-container {
-  display: flex;
-  flex-direction: column;
-  padding: 2% 0% 2% 3%;
-  background-color: #E4E4E4A8;
-} */
-
 .getMovieButton {
   font-size: 1.25vw;
   font-family: 'Roboto', sans-serif;
@@ -131,3 +124,6 @@
   background-color: #e4e4e4a8;
 }
 
+.movieAccordionHeader {
+  font-family: 'Roboto', sans-serif;
+}

@@ -1,10 +1,27 @@
 import { Container } from 'react-bootstrap';
+import CustomNavbar from './CustomNavBar';
+import styles from './HomePage.module.css';
+import HomePageHeader from './HomePageHeader';
+import AddMovieFormModal from './AddMovieFormModal';
 
-function AboutUs() {
+function AboutUs({ showModal, handleCloseModal, handleShowModal, postMovie, postError,postSuccess }) {
   return (
-    <Container>
-      <h1>About Us</h1>
-      <p>Hello, this is a placeholder message for the About Us page!</p>
+    <Container fluid className={styles.homePageGridContainer}>
+
+      <CustomNavbar onShowModal={handleShowModal} />
+
+      <Container>
+        <HomePageHeader page='about'/>  
+      </Container>
+      
+      <AddMovieFormModal 
+        showModal={showModal} 
+        handleCloseModal={handleCloseModal} 
+        postMovie={postMovie} 
+        postError={postError}
+        postSuccess={postSuccess}
+      />
+
     </Container>
   );
 }
