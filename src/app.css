@@ -84,26 +84,6 @@ img {
   margin-bottom: 3%;
 }
 
-/* button:hover {
-  background-color: #ec242a;
-  font-size: 1.6vw;
-  color: #ffffff;
-  cursor: pointer;
-} */
-
-/* button {
-  font-size: 1.5vw;
-  font-family: 'Roboto', sans-serif;
-  border-radius: 10px;
-  color: #171a1d;
-  background-color: #e4e4e4a8;
-  padding: 1.5% 0%;
-  width: 50%;
-  border: none;
-  margin-bottom: 5%;
-  transition: 350ms;
-} */
-
 #submit-button {
   width: 10vw;
   margin-top: 3%;
@@ -122,4 +102,8 @@ a {
   text-decoration: none;
   color: #171a1d;
   transition: 350ms;
+}
+
+#home-page-text {
+  color: black;
 }
