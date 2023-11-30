@@ -52,19 +52,29 @@ Any environment configuration steps.
 
 ## Change Log
 
-### 11-29-2023 thru 11-30-2023
+### 12-5-2023
 
-11-30-2023 9:15am - Set up basic CRUD routes
+12-5-2023 9:15am - Set up GET
 
-Name of feature: Set up basic shelll
+Name of feature: Ability to GET
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 9:00 am
+
+Finish time: 3:30 am
+
+Actual time needed to complete: 30 minutes
+
+### 11-30-2023 thru 12-4-2023
+
+11-30-2023 11am - Set up basic layouts and styling
+
+Name of feature: Set up basic shell
 
 Estimate of time needed to complete: 2 hours
 
-Start time: 9:30 am
-
-Finish time: 10:30 am
-
-Actual time needed to complete: 2 hours
+Actual time needed to complete: 5 hours
 
 ## Links
 
