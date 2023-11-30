@@ -52,6 +52,20 @@ Any environment configuration steps.
 
 ## Change Log
 
+### 12-6-2023
+
+12-6-2023 4:30pm - Set up UPDATE, DELETE, POST
+
+Name of feature: Ability to UPDATE, DELETE, POST
+
+Estimate of time needed to complete: 5 hour
+
+Start time: 8:00 am
+
+Finish time: 4:30 am
+
+Actual time needed to complete: 8 hours
+
 ### 12-5-2023
 
 12-5-2023 9:15am - Set up GET

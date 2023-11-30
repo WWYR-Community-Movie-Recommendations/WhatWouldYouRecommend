@@ -10,17 +10,38 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const SERVER = import.meta.env.VITE_SERVER;
 
 function App() {
-  const [showModal, setShowModal] = useState(false);
-  const [movies, setMovies] = useState([]); 
-  const [error, setError] = useState(null);
-  const [postError, setPostError] = useState(null);
-  const [postSuccess, setPostSuccess] = useState(null);
 
+  // ** States **
+
+  // Share Movie Modal and Handles
+  const [showModal, setShowModal] = useState(false);
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
 
-  // Replaces ComponentDidMount() - since using functional components
-  // The empty array ensures this effect runs only once after initial render
+  // Update Movie Modal and Handles
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const handleCloseUpdateModal = () => setShowUpdateModal(false);
+  const handleShowUpdateModal = () => setShowUpdateModal(true);
+
+  // Variable States
+  const [movies, setMovies] = useState([]);  // Hold movies from GET request
+  const [movieToUpdate, setMovieToUpdate] = useState({}); // Empty object to hold data of movie to be updated
+  const [updatedMovieId, setUpdatedMovieId] = useState(null); // Track which movie updated
+  const [deletingMovieId, setDeletingMovieId] = useState(null); // Track which movie being deleted
+  
+  // GET, POST, UPDATE, DELETE - success and error messages states
+  const [error, setError] = useState(null);
+  const [postError, setPostError] = useState(null);
+  const [postSuccess, setPostSuccess] = useState(null);
+  const [updateError, setUpdateError] = useState(null);
+  const [updateSuccess, setUpdateSuccess] = useState(null);
+  const [deleteError, setDeleteError] = useState(null); 
+  const [deleteSuccess, setDeleteSuccess] = useState(null); 
+  
+
+  // ** Functions **
+
+  // ComponenetDidMount() - replaced with useEffect
   useEffect(() => {
     getMovies();
   }, []); 
@@ -51,7 +72,7 @@ function App() {
     });
   }
   
-  // Post new movie to database
+  // POST new movie to database
   const postMovie = async (newMovie) => {
     const url = `${SERVER}/movies`;
     console.log(url);
@@ -82,6 +103,88 @@ function App() {
         setPostSuccess(null);
       });
   }
+
+  // UPDATE movie in database
+  const updateMovie = (movieToUpdate) => {
+
+    const url = `${SERVER}/movies/${movieToUpdate._id}`;
+
+    // this.getToken()
+    // .then(jwt => {
+    //   // Assign jwt (contains token) to headers
+    //   const config = {
+    //     headers: { 'Authorization': `Bearer ${jwt}` }
+    //   };
+
+    //   // Perform PUT request with axios
+    //   return axios.put(url, bookToUpdate, config);
+    // })
+    
+    axios.put(url, movieToUpdate)
+    .then(() => {
+      // Update state with updated movie
+      const updatedMovies = movies.map(oldMovie => 
+        oldMovie._id === movieToUpdate._id ? movieToUpdate : oldMovie
+      );
+      setMovies(updatedMovies);
+      setUpdateError(null);
+      setUpdateSuccess('Movie has been successfully updated!');
+      setUpdatedMovieId(movieToUpdate._id);
+    })
+    .catch(error => {
+      // Handle any errors from either getToken or axios.put
+      console.error("Error updating the movie:", error);
+      setUpdateError('Failed to update the movie, Please try again.');
+      setUpdateSuccess(null);
+    });
+  }
+
+  // DELETE movie in database
+  const deleteMovie = (id) => {
+    setDeletingMovieId(id); // Indicate which movie being deleted
+    const url = `${SERVER}/movies/${id}`;
+
+    // this.getToken()
+    // .then(jwt => {
+    //   // Assign jwt (contains token) to headers
+    //   const config = {
+    //     headers: { 'Authorization': `Bearer ${jwt}` }
+    //   };
+
+    //   // Perform DELETE request with axios
+    //   return axios.delete(url, config);
+    // })
+
+    axios.delete(url)
+      .then(() => {
+        // Update state to remove the deleted movie
+        const updatedMovies = movies.filter(movie => movie._id !== id);
+        setMovies(updatedMovies);
+        setDeleteError(null);
+        setDeleteSuccess('Movie has been removed successfully!');
+        deletingMovieId(id)
+      })
+      .catch(error => {
+        // Handle any errors from either getToken or axios.delete
+        console.error("Error deleting the movie:", error);
+        setDeleteError('Failed to delete the movie, Please try again.');
+        setDeleteSuccess(null);
+      });
+  }
+
+  // Handle update button clicks
+  const handleUpdateClick = (movie) => {
+    handleShowUpdateModal(); // First action, update state of modal to 'show'
+    setMovieToUpdate(movie); // Second action, set state of movie to update with data from existing movie
+  };
+
+  // Reset update success message when dismisses
+  const resetUpdateSuccess = () => {
+    setUpdateSuccess(null);
+  };
+
+
+  // ** Return() **
 
   return (
     <Router>
@@ -124,12 +227,29 @@ function App() {
             <CommunityList 
               movies={movies} 
               error={error} 
-              showModal={showModal} 
-              handleShowModal={handleShowModal} 
-              handleCloseModal={handleCloseModal} 
+
               postMovie={postMovie} 
               postError={postError}
               postSuccess={postSuccess}
+              showModal={showModal} 
+              handleShowModal={handleShowModal} 
+              handleCloseModal={handleCloseModal} 
+
+              updateMovie={updateMovie}
+              movieToUpdate={movieToUpdate}
+              updatedMovieId={updatedMovieId}
+              updateError={updateError}
+              updateSuccess={updateSuccess}
+              showUpdateModal={showUpdateModal}
+              handleShowUpdateModal={handleShowUpdateModal}
+              handleCloseUpdateModal={handleCloseUpdateModal}
+              handleUpdateClick={handleUpdateClick}
+              resetUpdateSuccess={resetUpdateSuccess}
+
+              deleteMovie={deleteMovie}
+              deletingMovieId={deletingMovieId}
+              deleteError={deleteError}
+              deleteSuccess={deleteSuccess}
             />
           } 
         />
