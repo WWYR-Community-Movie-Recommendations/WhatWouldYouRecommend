@@ -117,11 +117,6 @@
   cursor: pointer;
 }
 
-.homePageCarousel {
-  /* border: 3px solid red; */
-  /* margin-top: 1%; */
-}
-
 .homePageCarouselItem {
   text-align: center; /* Text alignment for the caption */
   /* border: 3px solid blue; For visual debugging, can be removed later */
@@ -136,6 +131,3 @@
   background-color: #e4e4e4a8;
 }
 
-.homePageVideoContainer {
-  /* border: 3px solid green; */
-}
