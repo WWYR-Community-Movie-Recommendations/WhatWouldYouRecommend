@@ -14,9 +14,10 @@ const SERVER = import.meta.env.VITE_SERVER;
 
 
 function App() {
+  // Destructured from useAuth0
+  const { isAuthenticated, getIdTokenClaims, isLoading } = useAuth0();
 
   // ** States **
-  const {isAuthenticated} = useAuth0();
 
   // Share Movie Modal and Handles
   const [showModal, setShowModal] = useState(false);
@@ -46,41 +47,68 @@ function App() {
 
   // ** Functions **
 
-  // ComponenetDidMount() - replaced with useEffect
+  // useEffect to call getMovies
   useEffect(() => {
-    getMovies();
-  }, []); 
+    if (!isLoading && isAuthenticated) {
+      // Only call getMovies if authentication is completed and user is authenticated
+      getMovies();
+    } else {
+      console.log("Waiting for authentication...");
+    }
+  }, [isAuthenticated, isLoading]); // Depend on both isAuthenticated and isLoading
 
-  // GET request API to fetch all movies from  database 
-  const getMovies = () => {
+  // Retrieve user token to authenticate on back end
+  const getToken = async () => {
+    try {
+      const tokenClaims = await getIdTokenClaims();
+      return tokenClaims.__raw;
+    } catch (error) {
+      console.error("Error retrieving token:", error);
+      setError(error.message);
+    }
+  };
 
-    // this.getToken(); ---> invoke function to test if able to retrieve user data along with token
-    
-    // Assign token to jwt via getToken function
-    // this.getToken()
-    // .then(jwt => {
-    //   // Assign jwt (contains token) to headers
-    //   const config = {
-    //     headers: { 'Authorization': `Bearer ${jwt}` }
-    //   };
+  // GET movies from database
+  const getMovies = async () => {
+    try {
+      const jwt = await getToken();
+      if (!jwt) {
+        throw new Error("Failed to retrieve JWT");
+      }
 
-    //   console.log(config);
-    //   // Pass book request along with config, allows backend to validate user auth prior to sending books data back
-    //   return axios.get(`${SERVER}/books`, config);
-    // })
-    axios.get(`${SERVER}/movies`)
-    .then(res => setMovies(res.data))
-    .catch(error => {
-      // Handle errors from either getToken or axios.get
+      const config = {
+        headers: { 'Authorization': `Bearer ${jwt}` }
+      };
+
+      console.log(config);
+      const response = await axios.get(`${SERVER}/movies`, config);
+      setMovies(response.data);
+    } catch (error) {
       console.error("Error in getMovies:", error);
       setError(error.message);
-    });
-  }
+    }
+  };
   
   // POST new movie to database
   const postMovie = async (newMovie) => {
     const url = `${SERVER}/movies`;
     console.log(url);
+
+    try {
+      const jwt = await getToken();
+      if (!jwt) {
+        throw new Error("Failed to retrieve JWT");
+      }
+
+      const config = {
+        headers: { 'Authorization': `Bearer ${jwt}` }
+      };
+
+      console.log(config); 
+      const response = await axios.post(url, newMovie, config);
+      setMovies(currentMovies => [...currentMovies, response.data]);
+      setPostError(null);
+      setPostSuccess('Movie has been addedd successfully');
 
     // this.getToken()
     //   .then(jwt => {
@@ -90,92 +118,92 @@ function App() {
     //     };
 
     //     // Perform the POST request with axios
-    //     return axios.post(url, newBook, config);
+    //     return axios.post(url, newMovie, config);
     //   })
-      console.log(newMovie);
-
-      axios.post(url, newMovie)
-      .then(response => {
-        // Handle successful response
-        setMovies(currentMovies => [...currentMovies, response.data]);
-        setPostError(null);
-        setPostSuccess('Movie has been addedd successfully');
-      })
-      .catch(error => {
-        // Handle any errors from either getToken or axios.post
+      // console.log(newMovie);
+      // axios.post(url, newMovie)
+      // .then(response => {
+      //   // Handle successful response
+      //   setMovies(currentMovies => [...currentMovies, response.data]);
+      //   setPostError(null);
+      //   setPostSuccess('Movie has been addedd successfully');
+      // })
+      // .catch(error => {
+      //   // Handle any errors from either getToken or axios.post
+      //   console.error("Error posting the movie:", error);
+      //   setPostError('Failed to add movie. Please try again.');
+      //   setPostSuccess(null);
+      // });
+    } catch (error) {
         console.error("Error posting the movie:", error);
         setPostError('Failed to add movie. Please try again.');
         setPostSuccess(null);
-      });
-  }
+    }
+  };
 
   // UPDATE movie in database
-  const updateMovie = (movieToUpdate) => {
-
+  const updateMovie = async (movieToUpdate) => {
     const url = `${SERVER}/movies/${movieToUpdate._id}`;
-
-    // this.getToken()
-    // .then(jwt => {
-    //   // Assign jwt (contains token) to headers
-    //   const config = {
-    //     headers: { 'Authorization': `Bearer ${jwt}` }
-    //   };
-
-    //   // Perform PUT request with axios
-    //   return axios.put(url, bookToUpdate, config);
-    // })
-    
-    axios.put(url, movieToUpdate)
-    .then(() => {
+  
+    try {
+      const jwt = await getToken();
+      if (!jwt) {
+        throw new Error('Failed to retrieve JWT');
+      }
+  
+      const config = {
+        headers: { Authorization: `Bearer ${jwt}` },
+      };
+  
+      console.log(config);
+      await axios.put(url, movieToUpdate, config);
+  
       // Update state with updated movie
-      const updatedMovies = movies.map(oldMovie => 
+      const updatedMovies = movies.map((oldMovie) =>
         oldMovie._id === movieToUpdate._id ? movieToUpdate : oldMovie
       );
       setMovies(updatedMovies);
       setUpdateError(null);
       setUpdateSuccess('Movie has been successfully updated!');
       setUpdatedMovieId(movieToUpdate._id);
-    })
-    .catch(error => {
-      // Handle any errors from either getToken or axios.put
-      console.error("Error updating the movie:", error);
+    } catch (error) {
+      console.error('Error updating the movie:', error);
       setUpdateError('Failed to update the movie, Please try again.');
       setUpdateSuccess(null);
-    });
-  }
+    }
+  };
+  
 
   // DELETE movie in database
-  const deleteMovie = (id) => {
+  const deleteMovie = async (id) => {
     setDeletingMovieId(id); // Indicate which movie being deleted
     const url = `${SERVER}/movies/${id}`;
-
-    // this.getToken()
-    // .then(jwt => {
-    //   // Assign jwt (contains token) to headers
-    //   const config = {
-    //     headers: { 'Authorization': `Bearer ${jwt}` }
-    //   };
-
-    //   // Perform DELETE request with axios
-    //   return axios.delete(url, config);
-    // })
-
-    axios.delete(url)
-      .then(() => {
-        // Update state to remove the deleted movie
-        const updatedMovies = movies.filter(movie => movie._id !== id);
-        setMovies(updatedMovies);
-        setDeleteError(null);
-        setDeleteSuccess('Movie has been removed successfully!');
-        deletingMovieId(id)
-      })
-      .catch(error => {
-        // Handle any errors from either getToken or axios.delete
-        console.error("Error deleting the movie:", error);
-        setDeleteError('Failed to delete the movie, Please try again.');
-        setDeleteSuccess(null);
-      });
-  }
+  
+    try {
+      const jwt = await getToken();
+      if (!jwt) {
+        throw new Error('Failed to retrieve JWT');
+      }
+  
+      const config = {
+        headers: { Authorization: `Bearer ${jwt}` },
+      };
+  
+      console.log(config);
+      await axios.delete(url, config);
+  
+      // Update state to remove the deleted movie
+      const updatedMovies = movies.filter(movie => movie._id !== id);
+      setMovies(updatedMovies);
+      setDeleteError(null);
+      setDeleteSuccess('Movie has been removed successfully!');
+      deletingMovieId(id);
+    } catch (error) {
+      console.error('Error deleting the movie:', error);
+      setDeleteError('Failed to delete the movie, Please try again.');
+      setDeleteSuccess(null);
+    }
+  };
 
   // Handle update button clicks
   const handleUpdateClick = (movie) => {

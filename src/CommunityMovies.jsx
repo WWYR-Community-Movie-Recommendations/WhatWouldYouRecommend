@@ -13,7 +13,11 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
           {movies.map((movie, index) => (
 
             <Accordion.Item eventKey={index.toString()} key={movie._id}>
-              <Accordion.Header className={styles.movieAccordionHeader}>{movie.movieName} - Recommended By: {movie.userName}</Accordion.Header>
+
+              <Accordion.Header className={styles.movieAccordionHeader}>
+                {movie.movieName} - Recommended By: {movie.userName}
+              </Accordion.Header>
+
               <Accordion.Body>
 
                 <Card style={{ width: '45vw' }} className={styles.movieCard}>
@@ -31,6 +35,7 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
                   }
 
                   <Card.Body>
+
                     <iframe
                       className={styles.movieVideoContainer}
                       width="100%"
@@ -40,6 +45,7 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
                       frameBorder="0"
                       allowFullScreen>
                     </iframe>
+
                     <Card.Title>{movie.movieName}</Card.Title>
                     <Card.Text>{movie.userComment}</Card.Text>
                     <Card.Text>{movie.genre}</Card.Text>
@@ -51,7 +57,7 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
                       variant="secondary" 
                       onClick={() => handleUpdateClick(movie)}
                     >
-                     Update Movie
+                      Update Movie
                     </Button>
                   
                     <Button 
