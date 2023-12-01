@@ -1,17 +1,22 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuth0, withAuth0 } from '@auth0/auth0-react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from './LandingPage';
 import HomePage from './HomePage';
 import AboutUs from './AboutUs';
 import CommunityList from "./CommunityList";
+import Profile from './Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 const SERVER = import.meta.env.VITE_SERVER;
+
 
 function App() {
 
   // ** States **
+  const {isAuthenticated} = useAuth0();
 
   // Share Movie Modal and Handles
   const [showModal, setShowModal] = useState(false);
@@ -194,70 +199,100 @@ function App() {
         <Route 
           path="/home" 
           element={
-            <HomePage 
-              movies={movies} 
-              error={error} 
-              showModal={showModal} 
-              handleShowModal={handleShowModal} 
-              handleCloseModal={handleCloseModal} 
-              postMovie={postMovie} 
-              postError={postError}
-              postSuccess={postSuccess}
-            />
+            isAuthenticated ? (
+              <HomePage 
+                movies={movies} 
+                error={error} 
+                showModal={showModal} 
+                handleShowModal={handleShowModal} 
+                handleCloseModal={handleCloseModal} 
+                postMovie={postMovie} 
+                postError={postError}
+                postSuccess={postSuccess}
+              />
+            ) : (
+              <LandingPage />
+            )
           } 
         />
 
         <Route 
           path="/about-us" 
           element={
-            <AboutUs 
-              showModal={showModal} 
-              handleShowModal={handleShowModal} 
-              handleCloseModal={handleCloseModal} 
-              postMovie={postMovie} 
-              postError={postError}
-              postSuccess={postSuccess}
-            />
+            isAuthenticated ? (
+              <AboutUs 
+                showModal={showModal} 
+                handleShowModal={handleShowModal} 
+                handleCloseModal={handleCloseModal} 
+                postMovie={postMovie} 
+                postError={postError}
+                postSuccess={postSuccess}
+              />
+            ) : (
+              <LandingPage />
+            )
           } 
         />
 
         <Route 
           path="/community-list" 
-          element={
-            <CommunityList 
-              movies={movies} 
-              error={error} 
+          element={ 
+            isAuthenticated ? (
+              <CommunityList 
+                movies={movies} 
+                error={error} 
 
-              postMovie={postMovie} 
-              postError={postError}
-              postSuccess={postSuccess}
+                postMovie={postMovie} 
+                postError={postError}
+                postSuccess={postSuccess}
+                showModal={showModal} 
+                handleShowModal={handleShowModal} 
+                handleCloseModal={handleCloseModal} 
+
+                updateMovie={updateMovie}
+                movieToUpdate={movieToUpdate}
+                updatedMovieId={updatedMovieId}
+                updateError={updateError}
+                updateSuccess={updateSuccess}
+                showUpdateModal={showUpdateModal}
+                handleShowUpdateModal={handleShowUpdateModal}
+                handleCloseUpdateModal={handleCloseUpdateModal}
+                handleUpdateClick={handleUpdateClick}
+                resetUpdateSuccess={resetUpdateSuccess}
+
+                deleteMovie={deleteMovie}
+                deletingMovieId={deletingMovieId}
+                deleteError={deleteError}
+                deleteSuccess={deleteSuccess}
+              />
+            ) : (
+              <LandingPage />
+            ) 
+          } 
+        />
+
+        <Route
+          path={'/profile'}
+          element={
+            isAuthenticated ? (
+              <Profile 
               showModal={showModal} 
               handleShowModal={handleShowModal} 
               handleCloseModal={handleCloseModal} 
-
-              updateMovie={updateMovie}
-              movieToUpdate={movieToUpdate}
-              updatedMovieId={updatedMovieId}
-              updateError={updateError}
-              updateSuccess={updateSuccess}
-              showUpdateModal={showUpdateModal}
-              handleShowUpdateModal={handleShowUpdateModal}
-              handleCloseUpdateModal={handleCloseUpdateModal}
-              handleUpdateClick={handleUpdateClick}
-              resetUpdateSuccess={resetUpdateSuccess}
-
-              deleteMovie={deleteMovie}
-              deletingMovieId={deletingMovieId}
-              deleteError={deleteError}
-              deleteSuccess={deleteSuccess}
+              postMovie={postMovie} 
+              postError={postError}
+              postSuccess={postSuccess}
             />
-          } 
+            ) : (
+              <LandingPage />
+            )
+          }
         />
-  
+
       </Routes>
     </Router>
   );   
 }
 
 
-export default App;
+export default withAuth0(App);
