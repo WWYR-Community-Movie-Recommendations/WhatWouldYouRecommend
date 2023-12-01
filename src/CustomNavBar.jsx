@@ -1,9 +1,10 @@
-// CustomNavbar.jsx
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import styles from './HomePage.module.css';
+import LogoutButton from './Logout';
+import { withAuth0 } from '@auth0/auth0-react';
 
-function CustomNavbar({ onShowModal }) {
+function CustomNavbar({ onShowModal, auth0 }) {
   return (
     <Navbar expand="lg" variant="dark" className={styles.homePageNavContainer}>
         <Nav className={`flex-column ${styles.homePageNavColumn}`}>
@@ -41,17 +42,11 @@ function CustomNavbar({ onShowModal }) {
             About Us
           </Button>
 
-          <Button 
-            variant="primary" 
-            as={Link} to="/logout" 
-            className={styles.homePageNavButton}
-          >
-            Log Out
-          </Button>
+          {auth0.isAuthenticated && <LogoutButton />}
 
         </Nav>
       </Navbar>
   );
 }
 
-export default CustomNavbar;
+export default withAuth0(CustomNavbar);
