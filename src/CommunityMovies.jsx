@@ -1,21 +1,66 @@
-import { Accordion, Card, Container, Button, Alert, Spinner } from 'react-bootstrap';
+import { Accordion, Card, Container, Button, Alert, Spinner, Dropdown } from 'react-bootstrap';
+import { useState } from 'react';
 import styles from './HomePage.module.css';
 import UpdateMovieFormModal from './UpateMovieFormModal';
 
 function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieToUpdate, updateError, updateSuccess, showUpdateModal, handleCloseUpdateModal, updatedMovieId, resetUpdateSuccess, deleteMovie, deletingMovieId, deleteSuccess }) {
 
+  const [sortCriteria, setSortCriteria] = useState('username');
+
+  const handleSort = (criteria) => {
+    setSortCriteria(criteria);
+  };
+
+  const sortedMovies = movies.sort((a, b) => {
+    switch (sortCriteria) {
+      case 'username':
+        return a.userName.localeCompare(b.userName);
+      case 'movieName':
+        return a.movieName.localeCompare(b.movieName);
+      case 'genre':
+        return a.genre.localeCompare(b.genre);
+      case 'recommendedByMe':
+        return a.sharedByMe - b.sharedByMe;
+      default:
+        return 0;
+    }
+  });
+
   return (
     <Container>
+       <div className={styles.sortDropdownContainer}>
+        <Dropdown>
+          <Dropdown.Toggle variant="primary" id="dropdown-sort">
+            Sort By
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={() => handleSort('username')}>
+              Username
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleSort('movieName')}>
+              Movie Title
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleSort('genre')}>
+              Genre
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleSort('recommendedByMe')}>
+              Shared By Me
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      </div>
+
       {error && <p className="error-message">Error: {error}</p>}
 
       {movies.length > 0 ? (
         <Accordion defaultActiveKey="0" flush className={styles.movieAccordion}>
-          {movies.map((movie, index) => (
+          {sortedMovies.map((movie, index) => (
 
             <Accordion.Item eventKey={index.toString()} key={movie._id}>
 
               <Accordion.Header className={styles.movieAccordionHeader}>
-                {movie.movieName} - Recommended By: {movie.userName}
+                {movie.movieName} - Genre: {movie.genre} - Recommended By: {movie.userName}
               </Accordion.Header>
 
               <Accordion.Body>

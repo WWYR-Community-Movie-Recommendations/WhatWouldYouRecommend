@@ -52,6 +52,34 @@ Any environment configuration steps.
 
 ## Change Log
 
+### 12-8-2023
+
+12-8-2023 10:00am - Sort movies
+
+Name of feature: Sort Movies community list
+
+Estimate of time needed to complete: 5 hour
+
+Start time: 7:00 am
+
+Finish time: 10:00 am
+
+Actual time needed to complete: 5 hours
+
+### 12-7-2023
+
+12-7-2023 4:30pm - Set up UPDATE, DELETE, POST via user Authentication
+
+Name of feature: Ability to UPDATE, DELETE, POST via user Authentication
+
+Estimate of time needed to complete: 5 hour
+
+Start time: 8:00 am
+
+Finish time: 1:00 pm
+
+Actual time needed to complete: 5 hours
+
 ### 12-6-2023
 
 12-6-2023 4:30pm - Set up UPDATE, DELETE, POST
