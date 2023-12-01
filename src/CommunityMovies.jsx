@@ -11,7 +11,9 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
     setSortCriteria(criteria);
   };
 
-  const sortedMovies = movies.sort((a, b) => {
+  const sortedMovies = [...movies].sort((a, b) => {
+    // const aValue = a[sortCriteria] || ''; // Fallback to empty string if undefined
+    // const bValue = b[sortCriteria] || ''; // Fallback to empty string if undefined
     switch (sortCriteria) {
       case 'username':
         return a.userName.localeCompare(b.userName);

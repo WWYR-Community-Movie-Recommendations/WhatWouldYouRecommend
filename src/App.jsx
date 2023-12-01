@@ -110,30 +110,6 @@ function App() {
       setPostError(null);
       setPostSuccess('Movie has been addedd successfully');
 
-    // this.getToken()
-    //   .then(jwt => {
-    //     // Assign jwt (contains token) to headers
-    //     const config = {
-    //       headers: { 'Authorization': `Bearer ${jwt}` }
-    //     };
-
-    //     // Perform the POST request with axios
-    //     return axios.post(url, newMovie, config);
-    //   })
-      // console.log(newMovie);
-      // axios.post(url, newMovie)
-      // .then(response => {
-      //   // Handle successful response
-      //   setMovies(currentMovies => [...currentMovies, response.data]);
-      //   setPostError(null);
-      //   setPostSuccess('Movie has been addedd successfully');
-      // })
-      // .catch(error => {
-      //   // Handle any errors from either getToken or axios.post
-      //   console.error("Error posting the movie:", error);
-      //   setPostError('Failed to add movie. Please try again.');
-      //   setPostSuccess(null);
-      // });
     } catch (error) {
         console.error("Error posting the movie:", error);
         setPostError('Failed to add movie. Please try again.');
@@ -237,6 +213,7 @@ function App() {
                 postMovie={postMovie} 
                 postError={postError}
                 postSuccess={postSuccess}
+                getToken={getToken}
               />
             ) : (
               <LandingPage />

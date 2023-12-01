@@ -52,7 +52,33 @@ Any environment configuration steps.
 
 ## Change Log
 
+### 12-9-2023
+
+12-9-2023 10:00am - Retrieve AI movie suggestions
+
+Name of feature: Ability to retrieve AI movie suggestions
+
+Estimate of time needed to complete: 5 hour
+
+Start time: 6:30 am
+
+Finish time: 8:30 am
+
+Actual time needed to complete: 7 hours
+
 ### 12-8-2023
+
+12-8-2023 10:00am - Retrieve AI movie suggestions
+
+Name of feature: Ability to retrieve AI movie suggestions
+
+Estimate of time needed to complete: 5 hour
+
+Start time: 10:00 am
+
+Finish time: 3:00 pm
+
+Actual time needed to complete:  in progress
 
 12-8-2023 10:00am - Sort movies
 
@@ -64,7 +90,7 @@ Start time: 7:00 am
 
 Finish time: 10:00 am
 
-Actual time needed to complete: 5 hours
+Actual time needed to complete: 3 hours
 
 ### 12-7-2023
 

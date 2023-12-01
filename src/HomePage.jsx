@@ -6,7 +6,7 @@ import HomePageHeader from './HomePageHeader';
 import AddMovieFormModal from './AddMovieFormModal';
 
 
-function HomePage({ movies, error, showModal, handleShowModal, handleCloseModal, postMovie, postError, postSuccess }) {
+function HomePage({ movies, error, showModal, handleShowModal, handleCloseModal, postMovie, postError, postSuccess, getToken }) {
   return (
     <Container fluid className={styles.homePageGridContainer}>
 
@@ -18,6 +18,7 @@ function HomePage({ movies, error, showModal, handleShowModal, handleCloseModal,
         <Movies 
           movies={movies}
           error={error}
+          getToken={getToken}
         />
       </Container>
 
