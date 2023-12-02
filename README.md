@@ -52,6 +52,20 @@ Any environment configuration steps.
 
 ## Change Log
 
+### 12-10-2023
+
+12-10-2023 10:00am - Sort ability in community list
+
+Name of feature: Ability to sort movies
+
+Estimate of time needed to complete: 3 hour
+
+Start time: 2:30 pm
+
+Finish time: 4:30 pm
+
+Actual time needed to complete: 7 hours
+
 ### 12-9-2023
 
 12-9-2023 10:00am - Retrieve AI movie suggestions
