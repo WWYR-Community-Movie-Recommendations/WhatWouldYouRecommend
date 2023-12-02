@@ -2,7 +2,7 @@ import { Container } from 'react-bootstrap';
 import styles from './HomePage.module.css';
 import Movies from './Movies';
 import CustomNavbar from './CustomNavBar';
-import HomePageHeader from './HomePageHeader';
+import Header from './Header';
 import AddMovieFormModal from './AddMovieFormModal';
 
 
@@ -13,7 +13,7 @@ function HomePage({ movies, error, showModal, handleShowModal, handleCloseModal,
       <CustomNavbar onShowModal={handleShowModal} />
 
       <Container>
-        <HomePageHeader page='home' />  
+        <Header page='home' />  
 
         <Movies 
           movies={movies}
