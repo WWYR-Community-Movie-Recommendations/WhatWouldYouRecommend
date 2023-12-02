@@ -1,32 +1,55 @@
+//CommunityMovies.jsx
 import { Accordion, Card, Container, Button, Alert, Spinner, Dropdown } from 'react-bootstrap';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import styles from './HomePage.module.css';
 import UpdateMovieFormModal from './UpateMovieFormModal';
+import { useAuth0 } from "@auth0/auth0-react";
 
 function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieToUpdate, updateError, updateSuccess, showUpdateModal, handleCloseUpdateModal, updatedMovieId, resetUpdateSuccess, deleteMovie, deletingMovieId, deleteSuccess }) {
 
   const [sortCriteria, setSortCriteria] = useState('username');
 
+  const { user } = useAuth0();
+
   const handleSort = (criteria) => {
     setSortCriteria(criteria);
   };
 
-  const sortedMovies = [...movies].sort((a, b) => {
-    // const aValue = a[sortCriteria] || ''; // Fallback to empty string if undefined
-    // const bValue = b[sortCriteria] || ''; // Fallback to empty string if undefined
-    switch (sortCriteria) {
-      case 'username':
-        return a.userName.localeCompare(b.userName);
-      case 'movieName':
-        return a.movieName.localeCompare(b.movieName);
-      case 'genre':
-        return a.genre.localeCompare(b.genre);
-      case 'recommendedByMe':
-        return a.sharedByMe - b.sharedByMe;
-      default:
-        return 0;
+  const sortedMovies = useMemo(() => {
+    let filteredMovies = movies;
+
+    if (sortCriteria === 'recommendedByMe') {
+      filteredMovies = movies.filter(movie => movie.email === user.email);
+    } else if (sortCriteria !== 'recommendedByMe' ) {
+      filteredMovies = movies.filter(movie => movie.email !== user.email);
     }
-  });
+
+    return filteredMovies.sort((a, b) => {
+      let aValue, bValue;
+      switch (sortCriteria) {
+        case 'username':
+          aValue = a.userName || '';
+          bValue = b.userName || '';
+          return aValue.localeCompare(bValue);
+        case 'movieName':
+          aValue = a.movieName || '';
+          bValue = b.movieName || '';
+          return aValue.localeCompare(bValue);
+        case 'genre':
+          aValue = a.genre || '';
+          bValue = b.genre || '';
+          return aValue.localeCompare(bValue);
+        case 'recommendedByMe':
+          // Assuming sharedByMe is a boolean
+          aValue = a.sharedByMe ? 1 : 0;
+          bValue = b.sharedByMe ? 1 : 0;
+          return aValue - bValue;
+        default:
+          return 0;
+      }
+    });
+  }, [movies, sortCriteria, user.email]);
+  
 
   return (
     <Container>
@@ -56,13 +79,13 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
       {error && <p className="error-message">Error: {error}</p>}
 
       {movies.length > 0 ? (
-        <Accordion defaultActiveKey="0" flush className={styles.movieAccordion}>
+        <Accordion  className={styles.movieAccordion}>
           {sortedMovies.map((movie, index) => (
 
             <Accordion.Item eventKey={index.toString()} key={movie._id}>
 
               <Accordion.Header className={styles.movieAccordionHeader}>
-                {movie.movieName} - Genre: {movie.genre} - Recommended By: {movie.userName}
+                {movie.movieName} - Genre: {movie.genre} - Recommended By: {movie.userName} - userEmail: {movie.email}
               </Accordion.Header>
 
               <Accordion.Body>
@@ -94,27 +117,30 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
                     </iframe>
 
                     <Card.Title>{movie.movieName}</Card.Title>
-                    <Card.Text>{movie.userComment}</Card.Text>
-                    <Card.Text>{movie.genre}</Card.Text>
+                    <Card.Text>Comment: {movie.userComment}</Card.Text>
+                    <Card.Text>Genre: {movie.genre}</Card.Text>
                     <Card.Text>Recommended By: {movie.userName}</Card.Text>
                     <Card.Text>Movie Id: {movie._id}</Card.Text>
 
-                    <Button 
-                      className='update-button' 
-                      variant="secondary" 
-                      onClick={() => handleUpdateClick(movie)}
-                    >
-                      Update Movie
-                    </Button>
-                  
-                    <Button 
-                      className='delete-button' 
-                      variant="danger" 
-                      onClick={() => deleteMovie(movie._id)}
-                    >
-                      {deletingMovieId=== movie._id ? <Spinner as="span" animation="border" size="sm" /> : 'Delete Movie'}
-                    </Button>
-
+                    {movie.email === user.email && (
+                      <>
+                        <Button 
+                          className='update-button' 
+                          variant="secondary" 
+                          onClick={() => handleUpdateClick(movie)}
+                        >
+                          Update Movie
+                        </Button>
+                      
+                        <Button 
+                          className='delete-button' 
+                          variant="danger" 
+                          onClick={() => deleteMovie(movie._id)}
+                        >
+                          {deletingMovieId=== movie._id ? <Spinner as="span" animation="border" size="sm" /> : 'Delete Movie'}
+                        </Button>
+                      </>
+                    )}
                   </Card.Body>
                 </Card>
               </Accordion.Body>
