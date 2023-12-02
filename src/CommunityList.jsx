@@ -1,11 +1,12 @@
+// CommunityList.jsx
 import { Container } from 'react-bootstrap';
 import CustomNavbar from './CustomNavBar';
 import styles from './HomePage.module.css';
-import HomePageHeader from './HomePageHeader';
+import Header from './Header';
 import AddMovieFormModal from './AddMovieFormModal';
 import CommunityMovies from './CommunityMovies';
 
-function CommunityList({ movies, movieToUpdate, error, showModal, handleShowModal, handleCloseModal, postMovie, postError, postSuccess, updateMovie, updateError, updateSuccess, showUpdateModal, handleShowUpdateModal, handleCloseUpdateModal, handleUpdateClick, updatedMovieId, resetUpdateSuccess, deleteMovie, deletingMovieId, deleteError, deleteSuccess }) {
+function CommunityList({ movies, movieToUpdate, error, showModal, handleShowModal, handleCloseModal, postMovie, postError, postSuccess, updateMovie, updateError, updateSuccess, showUpdateModal, handleShowUpdateModal, handleCloseUpdateModal, handleUpdateClick, updatedMovieId, resetUpdateSuccess, deleteMovie, deletingMovieId, deleteError, deleteSuccess, user }) {
 
   return (
     <Container fluid className={styles.homePageGridContainer}>
@@ -14,7 +15,7 @@ function CommunityList({ movies, movieToUpdate, error, showModal, handleShowModa
       
       <Container>
       
-        <HomePageHeader page='community' updateSuccess={{updateSuccess}}/>  
+        <Header page='community' updateSuccess={{updateSuccess}}/>  
 
         <CommunityMovies
           movies={movies}
@@ -34,6 +35,7 @@ function CommunityList({ movies, movieToUpdate, error, showModal, handleShowModa
           deletingMovieId={deletingMovieId}
           deleteError={deleteError}
           deleteSuccess={deleteSuccess}
+          user={user}
         />
 
       </Container>
