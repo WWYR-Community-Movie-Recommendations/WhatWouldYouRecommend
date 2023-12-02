@@ -1,3 +1,4 @@
+//App.jsx
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth0, withAuth0 } from '@auth0/auth0-react';
@@ -43,6 +44,9 @@ function App() {
   const [updateSuccess, setUpdateSuccess] = useState(null);
   const [deleteError, setDeleteError] = useState(null); 
   const [deleteSuccess, setDeleteSuccess] = useState(null); 
+
+  // Trigger re-fetch of data when a movie is updated
+  const [updateTrigger, setUpdateTrigger] = useState(0); // Add a trigger for updates
   
 
   // ** Functions **
@@ -55,7 +59,7 @@ function App() {
     } else {
       console.log("Waiting for authentication...");
     }
-  }, [isAuthenticated, isLoading]); // Depend on both isAuthenticated and isLoading
+  }, [isAuthenticated, isLoading, updateTrigger]); // Invoked if these dependencies change
 
   // Retrieve user token to authenticate on back end
   const getToken = async () => {
@@ -142,6 +146,8 @@ function App() {
       setUpdateError(null);
       setUpdateSuccess('Movie has been successfully updated!');
       setUpdatedMovieId(movieToUpdate._id);
+      // Trigger to refetch movies
+      setUpdateTrigger(prev => prev + 1);
     } catch (error) {
       console.error('Error updating the movie:', error);
       setUpdateError('Failed to update the movie, Please try again.');
