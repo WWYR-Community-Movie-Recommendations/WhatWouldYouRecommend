@@ -1,16 +1,37 @@
 import { Carousel, Card, Container } from 'react-bootstrap';
 import styles from './HomePage.module.css';
 import AIButton from './AIButton';
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Movies({ movies, error, getToken }) {
+  const { user } = useAuth0();
+
+  // Filter movies not shared by current user (that way only movies from other users display)
+  let filteredMovies = movies.filter(movie => movie.email !== user.email)
+
+  // Shuffle array
+  const shuffleArray = array => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  };
+
+  // Shuffle only if more than 4 movies
+  if (filteredMovies.length > 4) {
+    shuffleArray(filteredMovies);
+  }
+
+  // Slice to get 3 movies (random if shuffled, first 3 if not)
+  const selectedMovies = filteredMovies.slice(0, 3);
 
   return (
     <Container>
       {error && <p className="error-message">Error: {error}</p>}
   
       <Carousel className={styles.homePageCarousel} variant='dark'>
-        {movies.length > 0 ? (
-          movies.map((movie) => (
+        {selectedMovies.length > 0 ? (
+          selectedMovies.map((movie) => (
             <Carousel.Item key={movie._id} className={styles.homePageCarouselItem}>
 
               <Card style={{ width: '45vw' }} className={styles.homePageVideoCard}>
@@ -41,7 +62,7 @@ function Movies({ movies, error, getToken }) {
             </Carousel.Item>
           ))
         ) : (
-          error ? <h3>Error loading books.</h3> : <h3>No Books Found, Share a movie!</h3> // You can render something else when there are no movies
+          error ? <h3>Error loading movies.</h3> : <h3>No Movies Found, Share a movie!</h3> // You can render something else when there are no movies
         )}
       </Carousel>
 
