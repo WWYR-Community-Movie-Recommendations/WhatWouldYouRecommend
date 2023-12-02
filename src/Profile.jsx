@@ -2,7 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import CustomNavbar from './CustomNavBar';
 import styles from './HomePage.module.css';
-import HomePageHeader from './HomePageHeader';
+import Header from './Header';
 import AddMovieFormModal from './AddMovieFormModal';
 
 const Profile = ({ showModal, handleShowModal, handleCloseModal, postMovie, postError, postSuccess }) => {
@@ -22,7 +22,7 @@ const Profile = ({ showModal, handleShowModal, handleCloseModal, postMovie, post
         <CustomNavbar onShowModal={handleShowModal} />
         
         <Container>
-          <HomePageHeader page='profile' />
+          <Header page='profile' />
 
           <Row className="justify-content-center">
             <Col md={6} lg={4}>
