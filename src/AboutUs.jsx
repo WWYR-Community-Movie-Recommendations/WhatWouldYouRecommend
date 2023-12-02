@@ -1,7 +1,7 @@
 import { Container } from 'react-bootstrap';
 import CustomNavbar from './CustomNavBar';
 import styles from './HomePage.module.css';
-import HomePageHeader from './HomePageHeader';
+import Header from './Header';
 import AddMovieFormModal from './AddMovieFormModal';
 
 function AboutUs({ showModal, handleCloseModal, handleShowModal, postMovie, postError,postSuccess }) {
@@ -11,7 +11,7 @@ function AboutUs({ showModal, handleCloseModal, handleShowModal, postMovie, post
       <CustomNavbar onShowModal={handleShowModal} />
 
       <Container>
-        <HomePageHeader page='about'/>  
+        <Header page='about'/>  
       </Container>
       
       <AddMovieFormModal 
