@@ -49,7 +49,7 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
           bValue = b.genre || '';
           return aValue.localeCompare(bValue);
         case 'recommendedByMe':
-          // Assuming sharedByMe is a boolean
+          // SharedByMe is a boolean, if both true sort
           aValue = a.sharedByMe ? 1 : 0;
           bValue = b.sharedByMe ? 1 : 0;
           return aValue - bValue;

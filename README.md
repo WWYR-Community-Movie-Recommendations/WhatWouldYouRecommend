@@ -52,6 +52,16 @@ Any environment configuration steps.
 
 ## Change Log
 
+### 12-11-2023 thru 12-13-2023
+
+12-13-2023 2:30pm - Styling and retrieve by userID
+
+Name of feature: Retrieve by userID instead of email
+
+Estimate of time needed to complete: 3 hour
+
+Actual time needed to complete: 7 hours
+
 ### 12-10-2023
 
 12-10-2023 10:00am - Sort ability in community list
@@ -166,20 +176,26 @@ Actual time needed to complete: 5 hours
 
 ### Domain Model (image)
 
-[Domain Model](img/DomainModel_2.png)
+![Domain Model](img/DomainModel.png)
+
+### Database Schema (image)
+
+![Database Schema](img/DatabaseSchema.png)
 
 ### WireFrames (images)
 
-[index.html](img/index.html.png)  
+![Landing Page](img/LandingPage.png)  
 
-[home.html](img/Home.html.png)  
+![Home Page](img/HomePage.png)  
 
-[communityList.html](img/CommunityList.html.png)  
+![Community List](img/CommunityList.png)  
 
-[recommendMovie.html](img/RecommendMovie.html.png)
-
-[newUser.html](img/NewUser.html.png)
+![Share A Movie](img/ShareAMovieModal.png)
 
 ### Team Agreement
 
-[Team Agreement](img/index.html.png)
+[Team Agreement](TeamAgreement.md)
+
+### Lighthouse Scores
+
+LightHouse Score 11-07-2023 ![Lighthouse](img/LightHouseWWYR.png)

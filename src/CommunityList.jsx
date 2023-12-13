@@ -14,9 +14,9 @@ function CommunityList({ movies, movieToUpdate, error, showModal, handleShowModa
       <CustomNavbar onShowModal={handleShowModal} />
       
       <Container className={styles.HomePageRightContainer}>
-      
-        <Header page='community' updateSuccess={{updateSuccess}}/>  
-
+       
+        <Header page='community'/> 
+        
         <CommunityMovies
           movies={movies}
           error={error}

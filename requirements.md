@@ -48,3 +48,5 @@ The application will not provide movie recommendations from external sources or 
 4. When another user requests a random movie recommendation, the application retrieves a movie recommendation from the saved data (local storage).
 5. The selected movie details, including the YouTube trailer, contributor information, and comments, are presented to the user.
 6. Users can explore all movie recommendations through the dedicated data page, which displays the organized list of titles, YouTube trailers, contributor names, and comments.
+
+
