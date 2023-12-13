@@ -1,7 +1,7 @@
 //CommunityMovies.jsx
 import { Accordion, Card, Container, Button, Alert, Spinner, Dropdown } from 'react-bootstrap';
 import { useState, useMemo } from 'react';
-import styles from './HomePage.module.css';
+import styles from '../css/HomePage.module.css';
 import UpdateMovieFormModal from './UpateMovieFormModal';
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -55,7 +55,7 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
     <Container>
        <div className={styles.sortDropdownContainer}>
         <Dropdown>
-          <Dropdown.Toggle variant="primary" id="dropdown-sort">
+          <Dropdown.Toggle variant="danger" id="dropdown-sort">
             Sort By
           </Dropdown.Toggle>
 
@@ -79,13 +79,15 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
       {error && <p className="error-message">Error: {error}</p>}
 
       {movies.length > 0 ? (
-        <Accordion  className={styles.movieAccordion}>
+        
+        <Accordion  className={styles.movieAccordion} >
+
           {sortedMovies.map((movie, index) => (
 
             <Accordion.Item eventKey={index.toString()} key={movie._id}>
 
               <Accordion.Header className={styles.movieAccordionHeader}>
-                {movie.movieName} - Genre: {movie.genre} - Recommended By: {movie.userName} - userEmail: {movie.email}
+                {movie.movieName} - {movie.genre} - Recommended By: {movie.userName}
               </Accordion.Header>
 
               <Accordion.Body>
@@ -117,10 +119,9 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
                     </iframe>
 
                     <Card.Title>{movie.movieName}</Card.Title>
-                    <Card.Text>Comment: {movie.userComment}</Card.Text>
+                    <Card.Text>&quot;<em>{movie.userComment}</em>&quot;</Card.Text>
                     <Card.Text>Genre: {movie.genre}</Card.Text>
                     <Card.Text>Recommended By: {movie.userName}</Card.Text>
-                    <Card.Text>Movie Id: {movie._id}</Card.Text>
 
                     {movie.email === user.email && (
                       <>

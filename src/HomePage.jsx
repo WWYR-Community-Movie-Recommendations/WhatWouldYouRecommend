@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap';
-import styles from './HomePage.module.css';
+import styles from '../css/HomePage.module.css';
 import Movies from './Movies';
 import CustomNavbar from './CustomNavBar';
 import Header from './Header';
@@ -12,7 +12,7 @@ function HomePage({ movies, error, showModal, handleShowModal, handleCloseModal,
 
       <CustomNavbar onShowModal={handleShowModal} />
 
-      <Container>
+      <Container className={styles.HomePageRightContainer}>
         <Header page='home' />  
 
         <Movies 

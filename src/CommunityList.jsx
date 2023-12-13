@@ -1,7 +1,7 @@
 // CommunityList.jsx
 import { Container } from 'react-bootstrap';
 import CustomNavbar from './CustomNavBar';
-import styles from './HomePage.module.css';
+import styles from '../css/HomePage.module.css';
 import Header from './Header';
 import AddMovieFormModal from './AddMovieFormModal';
 import CommunityMovies from './CommunityMovies';
@@ -13,7 +13,7 @@ function CommunityList({ movies, movieToUpdate, error, showModal, handleShowModa
 
       <CustomNavbar onShowModal={handleShowModal} />
       
-      <Container>
+      <Container className={styles.HomePageRightContainer}>
       
         <Header page='community' updateSuccess={{updateSuccess}}/>  
 

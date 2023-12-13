@@ -84,7 +84,6 @@ function App() {
         headers: { 'Authorization': `Bearer ${jwt}` }
       };
 
-      console.log(config);
       const response = await axios.get(`${SERVER}/movies`, config);
       setMovies(response.data);
     } catch (error) {

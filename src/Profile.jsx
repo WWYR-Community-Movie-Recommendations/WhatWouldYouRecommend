@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import CustomNavbar from './CustomNavBar';
-import styles from './HomePage.module.css';
+import styles from '../css/HomePage.module.css';
 import Header from './Header';
 import AddMovieFormModal from './AddMovieFormModal';
 

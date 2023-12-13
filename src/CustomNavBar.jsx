@@ -1,6 +1,6 @@
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import styles from './HomePage.module.css';
+import styles from '../css/HomePage.module.css';
 import LogoutButton from './Logout';
 import { withAuth0 } from '@auth0/auth0-react';
 
@@ -9,14 +9,13 @@ function CustomNavbar({ onShowModal }) {
     <Navbar expand="lg" variant="dark" className={styles.homePageNavContainer}>
         <Nav className={`flex-column ${styles.homePageNavColumn}`}>
 
-          <Button 
-            variant="primary" 
-            as={Link} 
-            to="/home" 
+          <Nav.Link
+            as={Link}
+            to="/home"
             className={styles.homePageNavButton}
           >
             Home
-          </Button>
+          </Nav.Link>
 
           <Button 
             variant="primary" 
@@ -26,29 +25,29 @@ function CustomNavbar({ onShowModal }) {
             Share a Movie
           </Button>
 
-          <Button 
+          <Nav.Link 
             variant="primary" 
             as={Link} to="/community-list" 
             className={styles.homePageNavButton}
           >
             Community List
-          </Button>
+          </Nav.Link>
 
-          <Button
+          <Nav.Link
             variant="primary" 
             as={Link} to="/profile" 
             className={styles.homePageNavButton}
           >
-            Profile
-          </Button>
+            Your Profile
+          </Nav.Link>
 
-          <Button 
+          <Nav.Link 
             variant="primary" 
             as={Link} to="/about-us" 
             className={styles.homePageNavButton}
           >
-            About Us
-          </Button>
+            About
+          </Nav.Link>
 
           <LogoutButton />
 

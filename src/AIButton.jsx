@@ -1,8 +1,8 @@
 // AIButton.jsx
 import { useState } from 'react';
-// Added here
 import { Button, Modal, ListGroup, Spinner } from 'react-bootstrap';
 import axios from 'axios';
+import styles from '../css/HomePage.module.css';
 
 const SERVER = import.meta.env.VITE_SERVER;
 
@@ -10,7 +10,6 @@ function AIButton({ movieName, getToken }) {
   const [showModal, setShowModal] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
   const [currentMovie, setCurrentMovie] = useState('');
-  // Added here
   const [isLoading, setIsLoading] = useState(false);
 
   const handleRecommendationsClick = async () => {
@@ -29,7 +28,7 @@ function AIButton({ movieName, getToken }) {
       };
 
       const response = await axios.get(url, config);
-      // Added
+
       setIsLoading(false);
       setRecommendations(response.data.data);
       setCurrentMovie(movieName);
@@ -41,14 +40,14 @@ function AIButton({ movieName, getToken }) {
 
   return (
     <>
-      <Button onClick={handleRecommendationsClick}>
-        New! AI Recommendations for Movies Like This!
+      <Button onClick={handleRecommendationsClick} className={styles.AIButton}>
+        New! AI Recommendations!
       </Button>
 
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {isLoading ? "Loading..." : `Here are five movies like ${currentMovie}!`}
+          {isLoading ? "Loading..." : <>Here are five movies like <em>{currentMovie}</em>!</>}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -57,7 +56,7 @@ function AIButton({ movieName, getToken }) {
                 <Spinner animation="border" role="status">
                   <span className="visually-hidden">Loading...</span>
                 </Spinner>
-                <p>Retrieving movies like {currentMovie}...</p>
+                <p>Retrieving movies like <em>{movieName}</em>...</p>
               </div>
             ) : (
               <ListGroup>

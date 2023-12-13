@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button } from "react-bootstrap";
-import styles from './HomePage.module.css';
+import styles from '../css/HomePage.module.css';
 
 const LogoutButton = () => {
   const { logout } = useAuth0();

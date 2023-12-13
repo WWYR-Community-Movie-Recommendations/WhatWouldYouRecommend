@@ -1,0 +1,84 @@
+.LandingPageGridContainer{
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(2, 2fr);
+  grid-auto-columns: minmax(minimum, maximum);
+}
+
+.LandingPageLogoContainer {
+  /* border: 3px solid green; */
+  height: 100vh;
+  text-align: center;
+  background-color: #ec242a;
+  padding-bottom: 3%;
+}
+
+.LandingPageH1 {
+  color: #ffffff;
+  font-size: 5vw;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+ 
+}
+
+.LandingPageImg {
+  width: 50%;
+  max-width: 50vw;
+  height: auto;
+  border-radius: 10px;
+  border: 5px solid #ffffff;
+  margin-top: 2%;
+}
+
+.LandingPageHeroText {
+  color: #ffffff;
+  font-size: 2vw;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  margin-top: 3%;
+  
+}
+
+.LandingPageExistingUserContainer {
+  height: 100vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.LandingPageExistingUserText {
+  color: #030303;
+  font-size: 3vw;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  margin-top: 30%;
+}
+
+.LandingPageLoginButton {
+  margin-top: 3%;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5vw;
+  padding-right: 4%;
+  padding-left: 4%;
+  border-radius: 10px;
+  color: white;
+  margin: 4% 0 2%;
+  background-color: #ec242a;
+  border: none;
+  transition: 350ms;
+}
+
+.LandingPageLoginButton:hover {
+  background-color: #e4e4e4a8;
+  font-size: 1.6vw;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+

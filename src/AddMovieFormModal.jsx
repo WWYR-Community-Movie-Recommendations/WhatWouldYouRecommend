@@ -1,6 +1,6 @@
 import { Modal, Button, Form, Container, Alert } from 'react-bootstrap';
 import { useState } from 'react';
-import styles from './HomePage.module.css';
+import styles from '../css/HomePage.module.css';
 
 
 function AddMovieFormModal({ showModal, handleCloseModal, postMovie }) {

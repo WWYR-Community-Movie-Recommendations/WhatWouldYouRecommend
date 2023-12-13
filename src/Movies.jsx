@@ -1,10 +1,21 @@
 import { Carousel, Card, Container } from 'react-bootstrap';
-import styles from './HomePage.module.css';
+import styles from '../css/HomePage.module.css';
 import AIButton from './AIButton';
 import { useAuth0 } from "@auth0/auth0-react";
+import { useState, useEffect } from 'react';
 
 function Movies({ movies, error, getToken }) {
   const { user } = useAuth0();
+
+  // Added loading state to manage the fetching status of movies
+  const [isLoading, setIsLoading] = useState(true);
+
+  // useEffect to update loading state based on movies or error updates
+  useEffect(() => {
+    if (movies || error) {
+      setIsLoading(false);
+    }
+  }, [movies, error]);
 
   // Filter movies not shared by current user (that way only movies from other users display)
   let filteredMovies = movies.filter(movie => movie.email !== user.email)
@@ -17,8 +28,8 @@ function Movies({ movies, error, getToken }) {
     }
   };
 
-  // Shuffle only if more than 4 movies
-  if (filteredMovies.length > 4) {
+  // Shuffle only if more than 3 movies
+  if (filteredMovies.length > 3) {
     shuffleArray(filteredMovies);
   }
 
@@ -27,10 +38,20 @@ function Movies({ movies, error, getToken }) {
 
   return (
     <Container>
-      {error && <p className="error-message">Error: {error}</p>}
   
       <Carousel className={styles.homePageCarousel} variant='dark'>
-        {selectedMovies.length > 0 ? (
+        {isLoading ? (
+          // Display loading message while fetching movies
+          <h3 className={styles.homepageErrorMsg}>Fetching movies...</h3>
+
+        ) : error ? (
+
+          // Display error message if there is error in fetching movies
+          <h3 className={styles.homepageErrorMsg}>Error loading movies. Reason: {error}</h3>
+          
+        ) : selectedMovies.length > 0 ? (
+
+          // Display movies if available
           selectedMovies.map((movie) => (
             <Carousel.Item key={movie._id} className={styles.homePageCarouselItem}>
 
@@ -46,10 +67,9 @@ function Movies({ movies, error, getToken }) {
                     allowFullScreen>
                   </iframe>
                   <Card.Title>{movie.movieName}</Card.Title>
-                  <Card.Text>{movie.userComment}</Card.Text>
+                  <Card.Text>&quot;<em>{movie.userComment}</em>&quot;</Card.Text>
                   <Card.Text>Recommended By: {movie.userName}</Card.Text>
                   <Card.Text>Genre: {movie.genre}</Card.Text>
-                  <Card.Text>MovieId: {movie._id}</Card.Text>
 
                   <AIButton 
                     movieName={movie.movieName} 
@@ -62,8 +82,10 @@ function Movies({ movies, error, getToken }) {
             </Carousel.Item>
           ))
         ) : (
-          error ? <h3>Error loading movies.</h3> : <h3>No Movies Found, Share a movie!</h3> // You can render something else when there are no movies
-        )}
+
+          // Display message if not loading, no error, and no movies found
+          <h3 className={styles.homepageErrorMsg}>No Movies Found, Share a movie!</h3>
+        )}     
       </Carousel>
 
     </Container>

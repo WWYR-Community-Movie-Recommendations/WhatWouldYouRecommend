@@ -1,17 +1,21 @@
 import { Container } from 'react-bootstrap';
-import styles from './HomePage.module.css';
+import styles from '../css/HomePage.module.css';
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Header({ page }) {
+
+  const { user } = useAuth0();
+
   let title, subtitle;
 
   switch (page) {
     case 'home':
-      title = "Recommendations from your community!";
-      subtitle = "Welcome User!";
+      title = `Welcome ${user.given_name}!`;
+      subtitle = "Here are some random movies from your community!";
       break;
     case 'community':
       title = "Community List";
-      subtitle = "userOne, Check Out The Full List of Movies Shared By The Community!";
+      subtitle = "Check Out The Full List of Movies Shared By Your Community!";
       break;
     case 'profile':
       title = "Profile";
@@ -19,16 +23,16 @@ function Header({ page }) {
       break;  
     case 'about':
       title = "About Me";
-      subtitle = <>Name <em>&quot;NameInQuotes&quot;</em></>;
+      subtitle = "";
       break;
     default:
-      // Default or fallback titles
+      // Default/fallback title
       title = "Default Title";
       subtitle = "Default Subtitle";
   }
 
   return (
-    <Container>
+    <Container className={styles.homePageH1andH2}>
       <h1 className={styles.homePageH1}>{title}</h1>
       <h2 className={styles.homePageH2}>{subtitle}</h2>
     </Container>
