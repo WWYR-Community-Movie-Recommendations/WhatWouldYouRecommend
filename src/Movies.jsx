@@ -9,6 +9,7 @@ import MovieCard from './MovieCard';
 function Movies({ movies, error, getToken }) {
   // User info
   const { user } = useAuth0();
+  const currentUserID = user.sub
 
   // Added loading state to manage the fetching status of movies
   const [isLoading, setIsLoading] = useState(true);
@@ -21,7 +22,7 @@ function Movies({ movies, error, getToken }) {
   }, [movies, error]);
 
   // Filter movies not shared by current user (that way only movies from other users display)
-  let filteredMovies = movies.filter(movie => movie.email !== user.email)
+  let filteredMovies = movies.filter(movie => movie.userID !== currentUserID)
 
   // Shuffle array
   const shuffleArray = array => {

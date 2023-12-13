@@ -84,28 +84,15 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-/* .getMovieButton {
-  font-size: 1.25vw;
-  font-family: 'Roboto', sans-serif;
-  border-radius: 10px;
-  color: #171a1d;
-  margin: 2% 0 5% 3%;
-  background-color: #c;
-  padding: 0.5% 0;
-  width: 15%;
-  border: none;
-  transition: 350ms;
+.homePageVideoCard {
+  /* border: 3px solid yellow; */
+  justify-content: center;
+  margin: 0 auto;
+
 }
 
-.getMovieButton:hover {
-  background-color: #ec242a;
-  color: white;
-  cursor: pointer;
-} */
-
 .homePageVideoContainer {
-  margin-left: 3%;
-  margin-bottom: 2%;
+  margin: 3% auto;
   min-width: 25%; /* Minimum width of the element */
   max-width: 100%; /* Maximum width of the element */
 }
@@ -143,13 +130,6 @@
   /* border: 3px solid blue; */
 }
 
-.homePageVideoCard {
-  /* border: 3px solid yellow; */
-  justify-content: center;
-  margin: 0 auto;
-
-}
-
 .movieAccordion {
   border: 1px solid #ec242a;
   border-radius: 5px;
@@ -179,9 +159,59 @@
   background-color: #e4e4e4a8;
   color: black;
   cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .homepageErrorMsg{
   text-align: center;
   color: #ec242a;
 }
+
+.communityMovieCardBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.DeleteUpdateButtonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.DeleteButton {
+  margin-left: 3%;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 10px;
+  color: white;
+  background-color: #ec242a;
+  border: none;
+  width: 25%;
+  transition: 350ms;
+}
+
+.DeleteButton:hover {
+  background-color: #e4e4e4a8;
+  color: black;
+  cursor: pointer;
+  font-size: 1.1vw;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.UpdateButton {
+  font-family: 'Roboto', sans-serif;
+  border-radius: 10px;
+  color: white;
+  width: 25%;
+  transition: 350ms;
+}
+
+.UpdateButton:hover{
+  background-color: #e4e4e4a8;
+  color: black;
+  cursor: pointer;
+  border: none;
+  font-size: 1.1vw;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+

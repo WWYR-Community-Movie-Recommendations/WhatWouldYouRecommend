@@ -13,6 +13,7 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
 
   // User info
   const { user } = useAuth0();
+  const currentUserID = user.sub;
 
   // ** Functions **
 
@@ -26,9 +27,9 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
     let filteredMovies = movies;
 
     if (sortCriteria === 'recommendedByMe') {
-      filteredMovies = movies.filter(movie => movie.email === user.email);
+      filteredMovies = movies.filter(movie => movie.userID === currentUserID);
     } else if (sortCriteria !== 'recommendedByMe' ) {
-      filteredMovies = movies.filter(movie => movie.email !== user.email);
+      filteredMovies = movies.filter(movie => movie.userID !== currentUserID);
     }
 
     // Sort based on selected value from drop down
@@ -56,7 +57,7 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
           return 0;
       }
     });
-  }, [movies, sortCriteria, user.email]);
+  }, [movies, sortCriteria, currentUserID]);
   
 
   return (
@@ -109,27 +110,26 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
                       <p>{deleteSuccess}</p>
                     </Alert>
                   }
-                  <Card.Body>
+                  <Card.Body className={styles.communityMovieCardBody}>
                     <MovieCard 
                       movie={movie}
                     />
-                    {movie.email === user.email && (
-                      <>
+                    {movie.userID === currentUserID && (
+                      <Container className={styles.DeleteUpdateButtonContainer}>
                         <Button 
-                          className='update-button' 
-                          variant="secondary" 
+                          className={styles.UpdateButton} 
+                          variant="primary" 
                           onClick={() => handleUpdateClick(movie)}
                         >
                           Update Movie
                         </Button>
                         <Button 
-                          className='delete-button' 
-                          variant="danger" 
+                          className={styles.DeleteButton} 
                           onClick={() => deleteMovie(movie._id)}
                         >
                           {deletingMovieId=== movie._id ? <Spinner as="span" animation="border" size="sm" /> : 'Delete Movie'}
                         </Button>
-                      </>
+                      </Container>
                     )}
                   </Card.Body>
                 </Card>
