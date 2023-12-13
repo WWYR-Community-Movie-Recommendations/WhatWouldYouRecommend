@@ -95,7 +95,6 @@ function App() {
   // POST new movie to database
   const postMovie = async (newMovie) => {
     const url = `${SERVER}/movies`;
-    console.log(url);
 
     try {
       const jwt = await getToken();
@@ -107,7 +106,6 @@ function App() {
         headers: { 'Authorization': `Bearer ${jwt}` }
       };
 
-      console.log(config); 
       const response = await axios.post(url, newMovie, config);
       setMovies(currentMovies => [...currentMovies, response.data]);
       setPostError(null);
@@ -134,7 +132,6 @@ function App() {
         headers: { Authorization: `Bearer ${jwt}` },
       };
   
-      console.log(config);
       await axios.put(url, movieToUpdate, config);
   
       // Update state with updated movie
@@ -170,7 +167,6 @@ function App() {
         headers: { Authorization: `Bearer ${jwt}` },
       };
   
-      console.log(config);
       await axios.delete(url, config);
   
       // Update state to remove the deleted movie

@@ -1,10 +1,13 @@
+//Movies.jsx
 import { Carousel, Card, Container } from 'react-bootstrap';
 import styles from '../css/HomePage.module.css';
 import AIButton from './AIButton';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect } from 'react';
+import MovieCard from './MovieCard';
 
 function Movies({ movies, error, getToken }) {
+  // User info
   const { user } = useAuth0();
 
   // Added loading state to manage the fetching status of movies
@@ -38,56 +41,35 @@ function Movies({ movies, error, getToken }) {
 
   return (
     <Container>
-  
       <Carousel className={styles.homePageCarousel} variant='dark'>
         {isLoading ? (
           // Display loading message while fetching movies
           <h3 className={styles.homepageErrorMsg}>Fetching movies...</h3>
-
         ) : error ? (
-
           // Display error message if there is error in fetching movies
           <h3 className={styles.homepageErrorMsg}>Error loading movies. Reason: {error}</h3>
-          
         ) : selectedMovies.length > 0 ? (
-
           // Display movies if available
           selectedMovies.map((movie) => (
             <Carousel.Item key={movie._id} className={styles.homePageCarouselItem}>
-
               <Card style={{ width: '45vw' }} className={styles.homePageVideoCard}>
                 <Card.Body>
-                  <iframe
-                    className={styles.homePageVideoContainer}
-                    width="560"
-                    height="315"
-                    src={movie.videoLink} 
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allowFullScreen>
-                  </iframe>
-                  <Card.Title>{movie.movieName}</Card.Title>
-                  <Card.Text>&quot;<em>{movie.userComment}</em>&quot;</Card.Text>
-                  <Card.Text>Recommended By: {movie.userName}</Card.Text>
-                  <Card.Text>Genre: {movie.genre}</Card.Text>
-
+                  <MovieCard 
+                    movie={movie}
+                  />
                   <AIButton 
                     movieName={movie.movieName} 
                     getToken={getToken} 
                   />
-
                 </Card.Body>
               </Card>
-
             </Carousel.Item>
           ))
         ) : (
-
           // Display message if not loading, no error, and no movies found
           <h3 className={styles.homepageErrorMsg}>No Movies Found, Share a movie!</h3>
         )}     
       </Carousel>
-
     </Container>
   );
 }

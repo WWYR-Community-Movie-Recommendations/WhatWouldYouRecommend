@@ -4,17 +4,24 @@ import { useState, useMemo } from 'react';
 import styles from '../css/HomePage.module.css';
 import UpdateMovieFormModal from './UpateMovieFormModal';
 import { useAuth0 } from "@auth0/auth0-react";
+import MovieCard from './MovieCard';
 
 function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieToUpdate, updateError, updateSuccess, showUpdateModal, handleCloseUpdateModal, updatedMovieId, resetUpdateSuccess, deleteMovie, deletingMovieId, deleteSuccess }) {
 
+  // State
   const [sortCriteria, setSortCriteria] = useState('username');
 
+  // User info
   const { user } = useAuth0();
 
+  // ** Functions **
+
+  // Handle when switching drop down values
   const handleSort = (criteria) => {
     setSortCriteria(criteria);
   };
 
+  // Sort movies to show movies not by user, or by user if 'shared by me' selected
   const sortedMovies = useMemo(() => {
     let filteredMovies = movies;
 
@@ -24,6 +31,7 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
       filteredMovies = movies.filter(movie => movie.email !== user.email);
     }
 
+    // Sort based on selected value from drop down
     return filteredMovies.sort((a, b) => {
       let aValue, bValue;
       switch (sortCriteria) {
@@ -79,50 +87,32 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
       {error && <p className="error-message">Error: {error}</p>}
 
       {movies.length > 0 ? (
-        
         <Accordion  className={styles.movieAccordion} >
-
           {sortedMovies.map((movie, index) => (
-
             <Accordion.Item eventKey={index.toString()} key={movie._id}>
-
               <Accordion.Header className={styles.movieAccordionHeader}>
                 {movie.movieName} - {movie.genre} - Recommended By: {movie.userName}
               </Accordion.Header>
 
               <Accordion.Body>
-
                 <Card style={{ width: '45vw' }} className={styles.movieCard}>
-
                   {updateSuccess && movie._id === updatedMovieId && 
-                    <Alert variant="success" onClose={resetUpdateSuccess} dismissible>
+                    <Alert 
+                      variant="success" 
+                      onClose={resetUpdateSuccess} 
+                      dismissible>
                       <p>{updateSuccess}</p>
                     </Alert>
                   } 
-
                   {deleteSuccess && movie._id === deletingMovieId && 
                     <Alert variant="danger"  dismissible>
                       <p>{deleteSuccess}</p>
                     </Alert>
                   }
-
                   <Card.Body>
-
-                    <iframe
-                      className={styles.movieVideoContainer}
-                      width="100%"
-                      height="315"
-                      src={movie.videoLink}
-                      title="YouTube video player"
-                      frameBorder="0"
-                      allowFullScreen>
-                    </iframe>
-
-                    <Card.Title>{movie.movieName}</Card.Title>
-                    <Card.Text>&quot;<em>{movie.userComment}</em>&quot;</Card.Text>
-                    <Card.Text>Genre: {movie.genre}</Card.Text>
-                    <Card.Text>Recommended By: {movie.userName}</Card.Text>
-
+                    <MovieCard 
+                      movie={movie}
+                    />
                     {movie.email === user.email && (
                       <>
                         <Button 
@@ -132,7 +122,6 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
                         >
                           Update Movie
                         </Button>
-                      
                         <Button 
                           className='delete-button' 
                           variant="danger" 

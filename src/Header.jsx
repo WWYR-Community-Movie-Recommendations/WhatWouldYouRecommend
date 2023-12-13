@@ -18,11 +18,11 @@ function Header({ page }) {
       subtitle = "Check Out The Full List of Movies Shared By Your Community!";
       break;
     case 'profile':
-      title = "Profile";
-      subtitle = "Profile Information";
+      title = "Your Profile Information";
+      subtitle = "";
       break;  
     case 'about':
-      title = "About Me";
+      title = "About";
       subtitle = "";
       break;
     default:

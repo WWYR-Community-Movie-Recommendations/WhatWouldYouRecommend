@@ -9,19 +9,15 @@ import AddMovieFormModal from './AddMovieFormModal';
 function HomePage({ movies, error, showModal, handleShowModal, handleCloseModal, postMovie, postError, postSuccess, getToken }) {
   return (
     <Container fluid className={styles.homePageGridContainer}>
-
       <CustomNavbar onShowModal={handleShowModal} />
-
       <Container className={styles.HomePageRightContainer}>
         <Header page='home' />  
-
         <Movies 
           movies={movies}
           error={error}
           getToken={getToken}
         />
       </Container>
-
       <AddMovieFormModal 
         showModal={showModal} 
         handleCloseModal={handleCloseModal} 
@@ -29,7 +25,6 @@ function HomePage({ movies, error, showModal, handleShowModal, handleCloseModal,
         postError={postError}
         postSuccess={postSuccess}
       />
-
     </Container>
   );
 }

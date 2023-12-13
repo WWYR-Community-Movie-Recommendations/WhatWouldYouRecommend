@@ -5,26 +5,26 @@ import styles from '../css/HomePage.module.css';
 
 function AddMovieFormModal({ showModal, handleCloseModal, postMovie }) {
 
+  // States
   const [showAlert, setShowAlert] = useState(false);
   const [alertContent, setAlertContent] = useState('');
 
-  // Check if movie trailer is a valid YouTube link
-  const isValidYouTubeURL = (url) => {
+  // ** Functions **
 
+  // Function - Check if movie trailer is a valid YouTube link
+  const isValidYouTubeURL = (url) => {
     // Regular expression to match the YouTube URL pattern
     const youtubeURLRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
     // Test the URL against the regex pattern
     return youtubeURLRegex.test(url);
-
   };
 
-  // Convert url into embeddable format by extracting videoID from Youtube URL
-  const convertToEmbedURL = (youtubeURL) => {
 
-    // search for characters after 'v=' and ignore once reaches '&'
+  // Function - Convert url into embeddable format by extracting videoID from Youtube URL
+  const convertToEmbedURL = (youtubeURL) => {
+    // Search for characters after 'v=' and ignore once reaches '&'
     let regex = /[?&]v=([^&]+)/;
     let match = youtubeURL.match(regex);
-
     if (match) {
       return `https://www.youtube.com/embed/${match[1]}`;
     } else {
@@ -34,12 +34,12 @@ function AddMovieFormModal({ showModal, handleCloseModal, postMovie }) {
     }
   };
 
-  // Handle share book button
+  // Function Handle share a movie button
   const submitHandler = (e) => {
     e.preventDefault();
     const form = e.target;
     
-    // Extract form data
+    // Extract form data and set to newMovie object
     const newMovie = {
       movieName: form.movieName.value,
       userComment: form.userComment.value,
@@ -47,19 +47,21 @@ function AddMovieFormModal({ showModal, handleCloseModal, postMovie }) {
       genre: form.genre.value,
     };
 
-    // Validation checks
+    // Validation checks - fields must be filled in by user
     if (!newMovie.movieName || !newMovie.userComment || !newMovie.videoLink || !newMovie.genre) {
       setAlertContent('Please fill in all fields.');
       setShowAlert(true);
       return;
     }
 
+    // Check if link is valid youtube url
     if (!isValidYouTubeURL(newMovie.videoLink)) {
       setAlertContent('Please enter a valid YouTube link.');
       setShowAlert(true);
       return;
     }
 
+    // Convert into link into embeddable format 
     const embedURL = convertToEmbedURL(newMovie.videoLink);
     if (!embedURL) {
       setAlertContent('Failed to convert YouTube URL to an embeddable format.');
@@ -67,10 +69,10 @@ function AddMovieFormModal({ showModal, handleCloseModal, postMovie }) {
       return;
     }
 
+    // Set converted link as videoLink property in newMovie
     newMovie.videoLink = embedURL;
     
     // Post movie
-    console.log(newMovie);
     postMovie(newMovie);
     handleCloseModal(); 
     setShowAlert(false);
