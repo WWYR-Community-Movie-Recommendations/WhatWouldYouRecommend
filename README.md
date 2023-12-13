@@ -50,6 +50,8 @@ Any environment configuration steps.
 
 ### Languages & tools
 
+    JavaScript, CSS, Axios, React, React-Bootstrap, Auth0
+
 ## Change Log
 
 ### 12-11-2023 thru 12-13-2023
