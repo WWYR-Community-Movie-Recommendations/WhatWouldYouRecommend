@@ -82,36 +82,38 @@ function AddMovieFormModal({ showModal, handleCloseModal, postMovie }) {
   return (
     <Modal show={showModal} onHide={handleCloseModal}>
 
-        <Modal.Header closeButton>
-          <Modal.Title>Share Your Movie Recommendation!</Modal.Title>
+        <Modal.Header className={styles.ShareMovieFormTitle} closeButton>
+          <Modal.Title>
+            Share Your Movie Recommendation!
+            </Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>
+        <Modal.Body style={ {backgroundColor: '#e4e4e4a8'}}>
           <Container>
             {showAlert && (
               <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
                 {alertContent}
               </Alert>
             )}
-            <Form onSubmit={submitHandler}>
+            <Form onSubmit={submitHandler} >
               <Form.Group controlId="movieName">
                 <Form.Label></Form.Label>
-                <Form.Control placeholder="Enter Name of Movie" name="movieName" type="text"/>
+                <Form.Control style={ {boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)'}} placeholder="Enter Name of Movie" name="movieName" type="text"/>
               </Form.Group>
 
               <Form.Group controlId="userComment">
                 <Form.Label></Form.Label>
-                <Form.Control placeholder="Enter Movie Comment" name="userComment" type="text"/>
+                <Form.Control style={ {boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)'}} placeholder="Enter Movie Comment" name="userComment" type="text"/>
               </Form.Group>
 
               <Form.Group controlId="videoLink">
                 <Form.Label></Form.Label>
-                <Form.Control placeholder="Enter Movie Trailer URL" name="videoLink" type="text"/>
+                <Form.Control style={ {boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)'}}placeholder="Enter Movie Trailer URL" name="videoLink" type="text"/>
               </Form.Group>
 
               <Form.Group controlId="genre">
                 <Form.Label></Form.Label>
-                <Form.Control as="select" name="genre" defaultValue="">
+                <Form.Control style={ {boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)'}} as="select" name="genre" defaultValue="">
                   <option value="" disabled>Choose genre...</option>
                   <option value="Action">Action</option>
                   <option value="Adventure">Adventure</option>

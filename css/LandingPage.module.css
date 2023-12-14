@@ -11,7 +11,7 @@
   /* border: 3px solid green; */
   height: 100vh;
   text-align: center;
-  background-color: #ec242a;
+  background-color: #B150E2;
   padding-bottom: 3%;
 }
 
@@ -67,9 +67,10 @@
   border-radius: 10px;
   color: white;
   margin: 4% 0 2%;
-  background-color: #ec242a;
+  background-color: #872EC4;
   border: none;
   transition: 350ms;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .LandingPageLoginButton:hover {
@@ -80,5 +81,6 @@
   cursor: pointer;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
+
 
 
