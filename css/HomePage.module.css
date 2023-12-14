@@ -136,7 +136,10 @@
 .sortDropdownButton {
   background-color: #872EC4;
   border: none;
+  color: white;
+  font-family: 'Roboto', sans-serif;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 350ms;
 }
 
 .sortDropdownButton:hover {

@@ -18,7 +18,7 @@ function CustomNavbar({ onShowModal }) {
           </Nav.Link>
 
           <Button 
-            variant="primary" 
+            variant='custom' 
             onClick={onShowModal} 
             className={styles.homePageNavButton}
           >

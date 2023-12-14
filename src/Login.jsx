@@ -5,7 +5,7 @@ import styles from '../css/LandingPage.module.css';
 const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
 
-  return <Button className={styles.LandingPageLoginButton} variant="danger" onClick={() => loginWithRedirect()}>Log In</Button>;
+  return <Button className={styles.LandingPageLoginButton} variant='custom' onClick={() => loginWithRedirect()}>Log In</Button>;
 };
 
 export default LoginButton;
