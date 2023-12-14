@@ -18,6 +18,7 @@ function App() {
   // Destructured from useAuth0
   const { isAuthenticated, getIdTokenClaims, isLoading } = useAuth0();
 
+
   // ** States **
 
   // Share Movie Modal and Handles
@@ -203,6 +204,11 @@ function App() {
 
         <Route 
           path="/home" 
+          element={<div>Hello World</div>}
+        />
+
+        {/* <Route 
+          path="/home" 
           element={
             isAuthenticated ? (
               <HomePage 
@@ -220,7 +226,7 @@ function App() {
               <LandingPage />
             )
           } 
-        />
+        /> */}
 
         <Route 
           path="/about-us" 
