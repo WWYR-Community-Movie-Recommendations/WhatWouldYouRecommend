@@ -202,12 +202,12 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
 
-        <Route 
+        {/* <Route 
           path="/home" 
           element={<div>Hello World</div>}
-        />
+        /> */}
 
-        {/* <Route 
+        <Route 
           path="/home" 
           element={
             isAuthenticated ? (
@@ -226,7 +226,7 @@ function App() {
               <LandingPage />
             )
           } 
-        /> */}
+        />
 
         <Route 
           path="/about-us" 
