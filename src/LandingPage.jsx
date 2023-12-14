@@ -15,7 +15,7 @@ function LandingPage() {
           {/* https://unsplash.com/photos/wMkaMXTJjlQ Samuel Regan-Asante */}
           <img 
             className={styles.LandingPageImg} 
-            src="img/samuel-regan-asante-wMkaMXTJjlQ-unsplash.jpg" 
+            src="img/hero-image.jpg" 
             alt="picture of variety of movies" />
 
           <p className={styles.LandingPageHeroText}>
