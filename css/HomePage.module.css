@@ -44,11 +44,12 @@
 }
 
 .homePageNavContainer {
-  height: 100%;
+  height: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: top;
-  background-color: #ec242a;
+  background-color: #B150E2;
+  box-shadow: 4px 0px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .homePageNavColumn {
@@ -75,20 +76,21 @@
   overflow: hidden;
   text-overflow: ellipsis;
   font-family: 'Roboto', sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
 }
 
 .homePageNavButton:hover {
   color: white;
   background-color: #E4E4E4A8;;
   font-size: 1.6vw;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
 }
 
 .homePageVideoCard {
   /* border: 3px solid yellow; */
   justify-content: center;
   margin: 0 auto;
-
+  box-shadow: 10px 0px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .homePageVideoContainer {
@@ -106,34 +108,52 @@
     font-family: 'Roboto', sans-serif;
 }
 
+.ShareMovieFormTitle {
+  background-color: #B150E2;
+  color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
 .shareRecommendationButton {
-  margin-top: 3%;
   font-family: 'Roboto', sans-serif;
   border-radius: 10px;
   color: white;
   margin: 4% 0 2%;
-  background-color: #ec242a;
+  background-color: #872EC4;
   border: none;
   transition: 350ms;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .shareRecommendationButton:hover {
   background-color: #e4e4e4a8;
   color: black;
   cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  font-size: 1.2vw; 
+}
+
+.sortDropdownButton {
+  background-color: #872EC4;
+  border: none;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  font-size: 1.1vw; 
+}
+
+.sortDropdownButton:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
 }
 
 .homePageCarouselItem {
   text-align: center; 
+  padding-bottom: 1%;
   /* border: 3px solid blue; */
 }
 
 .movieAccordion {
-  border: 1px solid #ec242a;
+  border: 1px solid #B150E2;
   border-radius: 5px;
   margin-top: 1%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
 }
 
 .movieAccordionHeader {
@@ -142,6 +162,7 @@
 
 .movieCard {
   background-color: #e4e4e4a8;
+  box-shadow: 10px 0px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .AIButton {
@@ -150,16 +171,18 @@
   border-radius: 10px;
   color: white;
   margin: 4% 0 2%;
-  background-color: #ec242a;
+  background-color: #872EC4;
   border: none;
   transition: 350ms;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .AIButton:hover {
   background-color: #e4e4e4a8;
   color: black;
   cursor: pointer;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  font-size: 1.2vw;
 }
 
 .homepageErrorMsg{
