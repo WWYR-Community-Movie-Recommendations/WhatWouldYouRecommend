@@ -91,7 +91,7 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
         <Accordion  className={styles.movieAccordion} >
           {sortedMovies.map((movie, index) => (
             <Accordion.Item eventKey={index.toString()} key={movie._id}>
-              <Accordion.Header className={styles.movieAccordionHeader}>
+              <Accordion.Header>
                 {movie.movieName} - {movie.genre} - Recommended By: {movie.userName}
               </Accordion.Header>
 

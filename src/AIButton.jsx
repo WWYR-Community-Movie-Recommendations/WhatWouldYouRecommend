@@ -54,13 +54,13 @@ function AIButton({ movieName, getToken }) {
         New! AI Recommendations!
       </Button>
 
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>
+      <Modal show={showModal} onHide={() => setShowModal(false)} >
+        <Modal.Header closeButton className={styles.AIRecommendationModal}>
+          <Modal.Title >
           {isLoading ? "Loading..." : <>Here are five movies like <em>{currentMovie}</em>!</>}
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className={styles.AIListItemBody}>
           {isLoading ? (
               <div className="text-center">
                 <Spinner animation="border" role="status">
@@ -71,7 +71,7 @@ function AIButton({ movieName, getToken }) {
             ) : (
               <ListGroup>
                 {recommendations.map((rec, index) => (
-                  <ListGroup.Item key={rec + index}>{rec}</ListGroup.Item>
+                  <ListGroup.Item className={styles.AIListItem} key={rec + index}>{rec}</ListGroup.Item>
                 ))}
               </ListGroup>
             )}

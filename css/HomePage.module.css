@@ -81,7 +81,7 @@
 
 .homePageNavButton:hover {
   color: white;
-  background-color: #E4E4E4A8;;
+  background-color: #E4E4E4A8;
   font-size: 1.6vw;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
 }
@@ -150,13 +150,13 @@
 }
 
 .movieAccordion {
-  border: 1px solid #B150E2;
   border-radius: 5px;
   margin-top: 1%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
-}
-
-.movieAccordionHeader {
+  box-shadow: 4px 0px 8px 0 rgba(0, 0, 0, 0.2);
+  --bs-accordion-active-bg: #B150E2;
+  --bs-accordion-active-color: white;
+  --bs-accordion-btn-focus-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  --bs-accordion-btn-focus-border-color: #b150e2;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -237,4 +237,22 @@
   font-size: 1.1vw;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
+
+.AIRecommendationModal {
+  background-color: #B150E2;
+  color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+}
+
+.AIListItem {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin-bottom: 3%;
+  font-family: 'Roboto', sans-serif;
+}
+
+.AIListItemBody {
+  background-color: #E4E4E4A8;
+}
+
+
 
