@@ -50,7 +50,7 @@ function AIButton({ movieName, getToken }) {
 
   return (
     <>
-      <Button onClick={handleRecommendationsClick} className={styles.AIButton}>
+      <Button onClick={handleRecommendationsClick} variant='custom' className={styles.AIButton}>
         New! AI Recommendations!
       </Button>
 

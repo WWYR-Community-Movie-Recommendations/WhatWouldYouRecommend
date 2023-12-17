@@ -64,7 +64,7 @@ function CommunityMovies({ movies, error, handleUpdateClick, updateMovie, movieT
     <Container>
        <div>
         <Dropdown>
-          <Dropdown.Toggle className={styles.sortDropdownButton} variant='secondary' id="dropdown-sort">
+          <Dropdown.Toggle className={styles.sortDropdownButton} variant='custom' id="dropdown-sort">
             Sort By
           </Dropdown.Toggle>
 

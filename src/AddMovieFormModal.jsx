@@ -132,7 +132,7 @@ function AddMovieFormModal({ showModal, handleCloseModal, postMovie }) {
               
               <Button 
                 className={styles.shareRecommendationButton} 
-                variant="primary" 
+                variant='custom' 
                 type="submit"
               >
                 Share Movie!

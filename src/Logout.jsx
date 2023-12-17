@@ -7,7 +7,7 @@ const LogoutButton = () => {
 
   return (
     <Button 
-    variant="danger" 
+    variant='custom' 
     onClick={() => logout({ logoutParams: { returnTo: import.meta.env.VITE_AUTH0_LOGOUT_REDIRECT } })}
     className={styles.homePageNavButton}
     >
